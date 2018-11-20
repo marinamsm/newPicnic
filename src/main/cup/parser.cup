@@ -58,6 +58,8 @@ terminal        LPAREN, RPAREN, COMMA;
 terminal        BOOL, INT;
 terminal        IF, THEN, ELSE;
 terminal        LET, IN;
+terminal        NUM;
+terminal        ASSIGN;
 
 non terminal Program      program;
 non terminal Exp          exp;
