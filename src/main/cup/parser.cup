@@ -50,6 +50,7 @@ parser code {:
 
 terminal String LITINT;
 terminal String LITBOOL;
+terminal String LITNUM;
 terminal String ID;
 terminal        PLUS, MINUS, TIMES, DIV, POWER;
 terminal        EQ, NE, LT, LE, GT, GE;
@@ -86,8 +87,8 @@ program ::=
 exp ::=
   LITINT:cte                       {: RESULT = new ExpInt(loc(ctexleft, ctexright), cte); :}
 | LITBOOL:cte                      {: RESULT = new ExpBool(loc(ctexleft, ctexright), cte); :}
+| LITNUM:cte                       {: RESULT = new ExpNum(loc(ctexleft, ctexright), cte); :}
 | ID:n                             {: RESULT = new ExpVar(loc(nxleft, nxright), n); :}
-| NUM:n                            {: RESULT = new ExpNum(loc(nxleft, nxright), n); :}
 | exp:x PLUS exp:y                 {: RESULT = new ExpBin(loc(xxleft, yxright), BinOp.PLUS, x, y); :}
 | exp:x MINUS exp:y                {: RESULT = new ExpBin(loc(xxleft, yxright), BinOp.MINUS, x, y); :}
 | exp:x TIMES exp:y                {: RESULT = new ExpBin(loc(xxleft, yxright), BinOp.TIMES, x, y); :}
@@ -119,6 +120,7 @@ fun ::=
 type ::=
   INT:t  {: RESULT = new TyInt(loc(txleft, txright)); :}
 | BOOL:t {: RESULT = new TyBool(loc(txleft, txright)); :}
+| NUM:t  {: RESULT = new TyNum(loc(txleft, txright)); :}
 ;
 
 typeid ::=
