@@ -72,10 +72,10 @@ non terminal List<Fun>    funs;
 
 precedence left     OR;
 precedence left     AND;
-precedence nonassoc EQ, NE, LT, LE, GT, GE, ASSIGN;
+precedence nonassoc EQ, NE, LT, LE, GT, GE;
 precedence left     PLUS, MINUS;
 precedence left     TIMES, DIV;
-precedence right    POWER;
+precedence right    POWER, ASSIGN;
 
 start with program;
 
