@@ -81,6 +81,11 @@ import java_cup.runtime.ComplexSymbolFactory;
 
 litint    = [0-9]+
 litbool   = true | false
+FLit1     = [0-9]+ \. [0-9]*
+FLit2     = \. [0-9]+
+FLit3     = [0-9]+
+Exponent  = [eE] [+-]? [0-9]+
+litnum    = ({FLit1}|{FLit2}|{FLit3}) {Exponent}?
 id        = [a-zA-Z][a-zA-Z0-9_]*
 
 %%
@@ -92,9 +97,11 @@ id        = [a-zA-Z][a-zA-Z0-9_]*
 
 {litint}     { return tok(LITINT, yytext()); }
 {litbool}    { return tok(LITBOOL, yytext()); }
+{litnum}     { return tok(LITNUM, new Double(yytext())); }
 
 bool         { return tok(BOOL); }
 int          { return tok(INT); }
+num          { return tok(NUM); }
 if           { return tok(IF); }
 then         { return tok(THEN); }
 else         { return tok(ELSE); }
@@ -103,7 +110,8 @@ in           { return tok(IN); }
 
 {id}         { return tok(ID, yytext().intern()); }
 
-"="          { return tok(EQ); }
+"="          { return tok(ASSIGN); }
+"=="         { return tok(EQ); }
 "~="         { return tok(NE); }
 "<"          { return tok(LT); }
 "<="         { return tok(LE); }
