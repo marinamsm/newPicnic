@@ -57,6 +57,7 @@ public class ExpBin extends Exp {
                throw typeMismatch(right.loc, right.type, INT.T);
             return BOOL.T;
 
+         case ASSIGN:
          case EQ:
          case NE:
             if (left.type.is(right.type))
