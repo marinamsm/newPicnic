@@ -5,18 +5,18 @@ import io.vavr.collection.Tree;
 import types.NUM;
 import types.Type;
 
-public class ExpDouble extends Exp {
+public class ExpNum extends Exp {
 
     public final double value;
 
-    public ExpDouble(Loc loc, String value) {
+    public ExpNum(Loc loc, String value) {
         super(loc);
         this.value = new Double(value);
     }
 
     @Override
     public Tree.Node<String> toTree() {
-        return Tree.of(annotateType("ExpDouble: " + value));
+        return Tree.of(annotateType("ExpNum: " + value));
     }
 
     @Override
